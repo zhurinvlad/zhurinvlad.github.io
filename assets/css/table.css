@@ -1,0 +1,7 @@
+.table-content th { 
+		border: 1px solid #dfe2e5; /* Граница вокруг ячеек */
+	}
+.table-content td { 
+		border: 1px solid #dfe2e5; /* Граница вокруг ячеек */
+	}
+}
