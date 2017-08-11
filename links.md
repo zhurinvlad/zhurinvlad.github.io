@@ -8,16 +8,19 @@ This is the place for any useful information for the development.
 
 ## Other ##
 * [Proglib](https://proglib.io/p/2017-web-developer-path/) - путь web-разработчика.
+
 ## Backend ##
 * [http://rubular.com/](http://rubular.com/) - a Ruby regular expression editor. 
+
 ## DevOps ##
 *
+
 ## Fronend ##
 * [Animated Refresh Button](http://hugoware.net/snippets/animated-refresh-button)
 * [http://www.cssmatic.com/](http://www.cssmatic.com/) - настройка gradient, border, noise, shadow.
 * [CSS-only Weather App Concept[UX]](https://codepen.io/anon/pen/gxRVmY) 
 
-# TODO
+# TODO #
 - nvm, npm
 - minimization, server
 - ES6 https://ponyfoo.com/articles/tagged/es6-in-depth
