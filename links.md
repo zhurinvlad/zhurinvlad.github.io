@@ -10,6 +10,9 @@ This is the place for any useful information for the development.
 * [Proglib](https://proglib.io/p/2017-web-developer-path/) - путь web-разработчика.
 
 ## Backend ##
+#### Ruby/RoR ####
+* [Подборка материалов по Ruby и Ruby On Rails](https://proglib.io/p/ruby-materials-digest/)
+* [Railscasts](https://www.youtube.com/user/RailscastsReloaded/videos)
 * [http://rubular.com/](http://rubular.com/) - a Ruby regular expression editor. 
 
 ## DevOps ##
