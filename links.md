@@ -12,12 +12,12 @@ This is the place for any useful information for the development.
 ## Backend ##
 #### Ruby/RoR ####
 * [Подборка материалов по Ruby и Ruby On Rails](https://proglib.io/p/ruby-materials-digest/)
-* V [Railscasts](https://www.youtube.com/user/RailscastsReloaded/videos)
 * [http://rubular.com/](http://rubular.com/) - a Ruby regular expression editor. 
 * [http://guides.rubyonrails.org](http://guides.rubyonrails.org/caching_with_rails.html)
 * [http://rusrails.ru](http://rusrails.ru/action-controller-overview#za-predelami-oblasti-vidimosti-strong-parameters)
 * [http://api.rubyonrails.org](http://api.rubyonrails.org/classes/ActiveSupport/Concern.html)
 * [Class and instace methods in Ruby](http://www.railstips.org/blog/archives/2009/05/11/class-and-instance-methods-in-ruby/)
+* [Как DRYить модели](https://habrahabr.ru/hub/ror/)
 * V [Railscasts](https://www.youtube.com/user/RailscastsReloaded/videos)
 * V [http://railscasts.com](http://railscasts.com/?tag_id=2)
 * V [https://gorails.com/](https://gorails.com/)
