@@ -22,6 +22,7 @@ This is the place for any useful information for the development.
 * [Animated Refresh Button](http://hugoware.net/snippets/animated-refresh-button)
 * [http://www.cssmatic.com/](http://www.cssmatic.com/) - настройка gradient, border, noise, shadow.
 * [CSS-only Weather App Concept[UX]](https://codepen.io/anon/pen/gxRVmY) 
+* [CSS-original hover effects](http://www.webmasters.by/original-hover-effects-with-css3-4.html)
 
 # TODO #
 - nvm, npm
