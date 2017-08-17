@@ -21,7 +21,7 @@ This is the place for any useful information for the development.
 * V [Railscasts](https://www.youtube.com/user/RailscastsReloaded/videos)
 * V [http://railscasts.com](http://railscasts.com/?tag_id=2)
 * V [https://gorails.com/](https://gorails.com/)
-
+* Advanced Enumeration with Ruby [RU](https://habrahabr.ru/post/335072/) [EN](https://blog.codeship.com/advanced-enumeration-with-ruby/)
 ## DevOps ##
 *
 
