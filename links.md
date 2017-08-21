@@ -30,6 +30,7 @@ This is the place for any useful information for the development.
 * [http://www.cssmatic.com/](http://www.cssmatic.com/) - настройка gradient, border, noise, shadow.
 * [CSS-only Weather App Concept[UX]](https://codepen.io/anon/pen/gxRVmY) 
 * [CSS-original hover effects](http://www.webmasters.by/original-hover-effects-with-css3-4.html)
+* [https://learn.javascript.ru/](https://learn.javascript.ru/)
 
 # TODO #
 - nvm, npm
