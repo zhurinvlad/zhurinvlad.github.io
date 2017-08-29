@@ -24,3 +24,5 @@ permalink: /about/
 * [Payler](http://payler.com/)
 
 
+Наброски моего кода можно глянуть на [jsfiddle](https://jsfiddle.net/user/dashboard/) и [github](https://github.com/zhurinvlad) :)
+
