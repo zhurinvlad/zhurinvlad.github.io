@@ -1,0 +1,31 @@
+---
+layout: post
+title:  "Editors Tics&Tricks"
+date:   2017-08-29 14:27:16 +0300
+categories: software
+---
+
+Современные  редакторы предоставляют огромные возможности для того, чтобы разработчики экономили свое время. Однако порой мы забываем об этих возможностях и используем текстовые  редакторы как "Блокнот" в старом добром Windows.
+
+А т.к. я и сам часто ищу в интернете ту или иную комбинацию, решил собрать все а одном месте.
+
+## Консольные  редакторы ##
+### Vi ###
+[Шпаргалка](http://lib.ru/unixhelp/vibegin.txt)
+### Vim ###
+[Шпаргалка](http://eax.me/vim-commands/)
+[Wiki Шпаргалка](https://ru.wikibooks.org/wiki/Vim)
+### Nano ###
+[Шпаргалка]((http://help.ubuntu.ru/wiki/nano)
+
+## Текстовые  редакторы ##
+### Emacs ###
+С данным редактором мне не приходилось работать, однако, когда я наткнулся на этот канал [EmacsRocks](https://www.youtube.com/user/emacsrocks/videos)),
+точно для себя решил, что я должен его попробовать.
+
+### Sublime text ###
+Очень мощный инструмент c множеством плагинов. Вот одна из подборок действительно хороших [плагинов](https://habrahabr.ru/post/235901/). И подборка [горячих](http://www.hongkiat.com/blog/sublime-text-tips/) клавиш. [Тут](http://olivierlacan.com/posts/launch-sublime-text-3-from-the-command-line/) настройка как запускать из консоли.
+
+### RubyMine ###
+Если мне что-то нужно по RubyMine я захожу сюда - [RubyMineTips](https://github.com/amckinnell/RubyMineTips/wiki)
+
