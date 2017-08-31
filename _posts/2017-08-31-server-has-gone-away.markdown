@@ -15,8 +15,8 @@ categories: software
 <figure>
     <figcaption># Открытие файла настроек MySQL</figcaption>
     {% highlight powershell %}
-        sudo nano 
-        /etc/mysql/my.cnf
+    sudo nano 
+    /etc/mysql/my.cnf
     {% endhighlight %}
 </figure>
 
@@ -25,7 +25,7 @@ categories: software
 <figure>
     <figcaption># Время ожидания в секундах, можно установить вплоть до 28800 с (8 часов)</figcaption>
     {% highlight powershell %}
-        wait_timeout = 600
+    wait_timeout = 600
    {% endhighlight %}
 </figure>
 
@@ -34,7 +34,7 @@ categories: software
 <figure>
     <figcaption># Перезагрузка базы данных MySQL</figcaption>
     {% highlight powershell %}
-        sudo /etc/init.d/mysql restart 
+    sudo /etc/init.d/mysql restart 
    {% endhighlight %}
 </figure>
 
@@ -46,10 +46,10 @@ categories: software
 <figure>
     <figcaption># Увеличение лимита размера входящего пакета, в МБ</figcaption>
     {% highlight powershell %}
-        [mysqld]
-        ...
-        max_allowed_packet = 64M
-        …
+    [mysqld]
+    ...
+    max_allowed_packet = 64M
+    …
    {% endhighlight %}
 </figure>
 Также не забудьте перезагрузить базу данных.
@@ -78,92 +78,93 @@ MySQL поддерживает флаг повторного подключен�
  
  а также указаны другие [минусы](https://dev.mysql.com/doc/refman/5.7/en/c-api-auto-reconnect.html). Опираясь на это руководство *ActiveRecord* с установленным флагом попытается подключиться всего  ***один раз***!
  
-``` The MySQL client library can perform an automatic reconnection to the server if it finds that the connection is down when you attempt to send a statement to the server to be executed. If auto-reconnect is enabled, the library tries once to reconnect to the server and send the statement again. ```
-
+{% highlight %}
+The MySQL client library can perform an automatic reconnection to the server if it finds that the connection is down when you attempt to send a statement to the server to be executed. If auto-reconnect is enabled, the library tries once to reconnect to the server and send the statement again.
+{% endhighlight %}
 
 Такое поведение далеко не самое лучшее, ведь возможны случаи, когда нам потребуется больше одной попытки подключения. Например неставить работа сервера при репликации master-slave. И на некоторое время мы должны не потерять соедениение, чтобы обеспечить надежность сервиса и не потерять запрос.
 
 Один из способов сделать это - добавить патч к *AR*, который будет выполнять автоматический reconnect нужно количество раз через нужные нам интервалы.
 
 {% highlight ruby linenos %}
-    module Mysql2AdapterPatch
-      def execute(*args)
-        # During `reconnect!`, `Mysql2Adapter` first disconnect and set the
-        # @connection to nil, and then tries to connect. When connect fails,
-        # @connection will be left as nil value which will cause issues later.
-        connect if @connection.nil?
-    
-        begin
-          super(*args)
-        rescue ActiveRecord::StatementInvalid => e
-          if e.message =~ /server has gone away/i
-            in_transaction = transaction_manager.current_transaction.open?
-            try_reconnect
-            in_transaction ? raise : retry
-          else
-            raise
-          end
-        end
-      end
-    
-      private
-      def try_reconnect
-        sleep_times = [0.1, 0.5, 1, 2, 4, 8]
-    
-        begin
-          reconnect!
-        rescue Mysql2::Error => e
-          sleep_time = sleep_times.shift
-          if sleep_time && e.message =~ /can't connect/i
-            warn "Server timed out, retrying in #{sleep_time} sec."
-            sleep sleep_time
-            retry
-          else
-            raise
-          end
-        end
+module Mysql2AdapterPatch
+  def execute(*args)
+    # During `reconnect!`, `Mysql2Adapter` first disconnect and set the
+    # @connection to nil, and then tries to connect. When connect fails,
+    # @connection will be left as nil value which will cause issues later.
+    connect if @connection.nil?
+
+    begin
+      super(*args)
+    rescue ActiveRecord::StatementInvalid => e
+      if e.message =~ /server has gone away/i
+        in_transaction = transaction_manager.current_transaction.open?
+        try_reconnect
+        in_transaction ? raise : retry
+      else
+        raise
       end
     end
-    
-    require 'active_record/connection_adapters/mysql2_adapter'
-    ActiveRecord::ConnectionAdapters::Mysql2Adapter.prepend Mysql2AdapterPatch
+  end
+
+  private
+  def try_reconnect
+    sleep_times = [0.1, 0.5, 1, 2, 4, 8]
+
+    begin
+      reconnect!
+    rescue Mysql2::Error => e
+      sleep_time = sleep_times.shift
+      if sleep_time && e.message =~ /can't connect/i
+        warn "Server timed out, retrying in #{sleep_time} sec."
+        sleep sleep_time
+        retry
+      else
+        raise
+      end
+    end
+  end
+end
+
+require 'active_record/connection_adapters/mysql2_adapter'
+ActiveRecord::ConnectionAdapters::Mysql2Adapter.prepend Mysql2AdapterPatch
 {% endhighlight %}
 
 В случае, если соединение будет потеряно, он будет пытаться повторить запрос и завершиться успешно когда сервер БД поднимется.
 
 {% highlight powershell %}
-    >> Post.count
-       (0.6ms)  SELECT COUNT(*) FROM `posts`
-    Server timed out, retrying in 0.1 sec.
-    Server timed out, retrying in 0.5 sec.
-    Server timed out, retrying in 1 sec.
-    Server timed out, retrying in 2 sec.
-    Server timed out, retrying in 4 sec.
-       (1.1ms)  SELECT COUNT(*) FROM `posts`
-    => 0
+>> Post.count
+   (0.6ms)  SELECT COUNT(*) FROM `posts`
+Server timed out, retrying in 0.1 sec.
+Server timed out, retrying in 0.5 sec.
+Server timed out, retrying in 1 sec.
+Server timed out, retrying in 2 sec.
+Server timed out, retrying in 4 sec.
+   (1.1ms)  SELECT COUNT(*) FROM `posts`
+=> 0
 {% endhighlight %}
 
 Стоит отметить, что если разрыв соединения произошел в блоке транзакции, и затем восстановилось, то будут продолжаться выполняться следующие запросы, а все предыдущие запросы от начала транзакции до момента, когда соединение было отключено, будут проигнорированы. Вот почему с этим патчем в блоке *transaction* безопаснее повторно вызвать ошибку подключения.
 
 Рассмотрим пример:
 {% highlight ruby %}
-    Post.transaction do
-      Post.create
-      sleep 5
-      Post.count
-    end
+Post.transaction do
+  Post.create
+  sleep 5
+  Post.count
+end
 {% endhighlight %}
 
 В данном случае, если при `sleep 5` произошло успешное переподключение, то все равно будет вызвана ошибка подключения, т.к. в соответствии с документацией MySQL, описанной выше, Post.create выполнено не будет.
 
 {% highlight powershell %}
-       (0.3ms)  BEGIN
-      SQL (0.2ms)  INSERT INTO `posts` (`created_at`, `updated_at`) VALUES ('2017-01-18 20:18:14', '2017-01-18 20:18:14')
-       (0.2ms)  SELECT COUNT(*) FROM `posts`
-    Server timed out, retrying in 0.1 sec.
-    Server timed out, retrying in 0.5 sec.
-    Server timed out, retrying in 1 sec.
-    Server timed out, retrying in 2 sec.
-       (0.1ms)  ROLLBACK
-    ActiveRecord::StatementInvalid: Mysql2::Error: MySQL server has gone away: SELECT COUNT(*) FROM `posts`
+   (0.3ms)  BEGIN
+  SQL (0.2ms)  INSERT INTO `posts` (`created_at`, `updated_at`) VALUES ('2017-01-18 20:18:14', '2017-01-18 20:18:14')
+   (0.2ms)  SELECT COUNT(*) FROM `posts`
+Server timed out, retrying in 0.1 sec.
+Server timed out, retrying in 0.5 sec.
+Server timed out, retrying in 1 sec.
+Server timed out, retrying in 2 sec.
+   (0.1ms)  ROLLBACK
+ActiveRecord::StatementInvalid: Mysql2::Error: MySQL server has gone away: SELECT COUNT(*) FROM `posts`
 {% endhighlight %}
