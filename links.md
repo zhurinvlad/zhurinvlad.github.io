@@ -21,6 +21,10 @@ This is the place for any useful information for the development.
 * V [https://gorails.com/](https://gorails.com/)
 * Advanced Enumeration with Ruby [RU](https://habrahabr.ru/post/335072/) [EN](https://blog.codeship.com/advanced-enumeration-with-ruby/)
 * [https://wyeworks.com](https://wyeworks.com)
+#### Rspec
+* [Introduction](https://hackernoon.com/your-guide-to-testing-in-ruby-on-rails-5-c8bd122e38ad)
+* [Shared examples](https://relishapp.com/rspec/rspec-core/v/3-5/docs/example-groups/shared-examples)
+
 # DevOps
 *
 
