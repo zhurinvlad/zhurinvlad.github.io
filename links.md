@@ -9,6 +9,7 @@ This is the place for any useful information for the development.
 # Backend
 
 ### Ruby/RoR
+* [Rails 5 series](http://blog.bigbinary.com/categories/Rails-5)
 * [Подборка материалов по Ruby и Ruby On Rails](https://proglib.io/p/ruby-materials-digest/)
 * [http://rubular.com/](http://rubular.com/) - a Ruby regular expression editor. 
 * [http://guides.rubyonrails.org](http://guides.rubyonrails.org/caching_with_rails.html)
