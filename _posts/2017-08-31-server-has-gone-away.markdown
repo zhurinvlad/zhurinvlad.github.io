@@ -78,9 +78,11 @@ MySQL поддерживает флаг повторного подключен�
  
  а также указаны другие [минусы](https://dev.mysql.com/doc/refman/5.7/en/c-api-auto-reconnect.html). Опираясь на это руководство *ActiveRecord* с установленным флагом попытается подключиться всего  ***один раз***!
  
-{% highlight %}
-The MySQL client library can perform an automatic reconnection to the server if it finds that the connection is down when you attempt to send a statement to the server to be executed. If auto-reconnect is enabled, the library tries once to reconnect to the server and send the statement again.
-{% endhighlight %}
+```
+The MySQL client library can perform an automatic reconnection to the server if
+it finds that the connection is down when you attempt to send a statement to the server to be executed. 
+If auto-reconnect is enabled, the library tries once to reconnect to the server and send the statement again.
+```
 
 Такое поведение далеко не самое лучшее, ведь возможны случаи, когда нам потребуется больше одной попытки подключения. Например неставить работа сервера при репликации master-slave. И на некоторое время мы должны не потерять соедениение, чтобы обеспечить надежность сервиса и не потерять запрос.
 
