@@ -2,6 +2,10 @@
 layout: post
 title:  "MySQL server has gone away. How to fix?"
 date:   2017-08-31 09:27:16 +0300
+thumbnail_path: blog/mysql_server_has_gone_away/has_gone_away.png
+tags:
+- Rails
+- MySql
 categories: software
 ---
 

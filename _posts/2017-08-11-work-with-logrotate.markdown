@@ -2,6 +2,10 @@
 layout: post
 title:  "Работа с Logrotate"
 date:   2017-08-11 11:53:16 +0300
+thumbnail_path: blog/logrotate/stock.jpg
+tags:
+- Software
+- DevOps
 categories: software
 ---
 

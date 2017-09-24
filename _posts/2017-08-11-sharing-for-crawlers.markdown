@@ -2,13 +2,18 @@
 layout: post
 title:  "Sharing for Crawlers"
 date:   2017-08-11 12:53:16 +0300
+tags:
+- js
+- DevOps
+- Crawlers
+thumbnail_path: blog/sharing-for-crawlers/workflow.png
 categories: software
 ---
 
 ## Проблема ##
 Роботы и краулеры не умеют выполнять JS, соответсвенно контент не будет загружен. Поэтому если это не "статика" необходима дополнительная настройка сервера, который проверяет `User-Agent` и затем вместо того, чтобы показывать простой файл шаблона, например, AngularJS, перенаправляет его на страницу, созданную сервером, которая будет содержать желаемые метатеги, заполненные правильной информацией. 
-
-{% include media-image.html url="workflow.png" caption="Схема работы такого подхода" link="https://github.com/DerekCuevas/friend-list" width="500" %}
+{% include figure.html path=page.thumbnail_path alt="Схема работы такого подхода" %}
+{% include media-image.html url=page.thumbnail_path caption="Схема работы такого подхода" link="https://github.com/DerekCuevas/friend-list" width="500" %}
 
 #### Несколько полезных ссылок для шаринга информации с помощью crawlers (краулеров) ####
 

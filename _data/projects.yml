@@ -1,0 +1,7 @@
+- name: "Atomic Squirrel"
+  date: "2015"
+  description: |
+    In 2015, I founded Atomic Squirrel, a company that specialized in helping new startups get off the ground. In
+    2016, Atomic Squirrel merged with another company called Phoenix DevOps to become Gruntwork.
+  url: "https://www.atomic-squirrel.net"
+  image: "atomic-squirrel-logo-text.png"

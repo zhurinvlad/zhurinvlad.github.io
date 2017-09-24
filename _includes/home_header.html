@@ -1,0 +1,11 @@
+<div class="center">
+  <a href="{{ site.base_url }}">
+    {% include image.html path=site.thumbnail_path alt=site.name class="border bg-white p1 border-light-gray circle square-100" %}
+  </a>
+  {% include header-h1.html %}
+	<div id="particles-js" class="page__hero{% if page.header.overlay_color or page.header.overlay_image %}--overlay{% endif %}"
+	  style="{% if page.header.overlay_color %}background-color: {{ page.header.overlay_color | default: 'transparent' }};{% endif %} {% if overlay_img_path %}background-image: {% if overlay_filter %}linear-gradient({{ overlay_filter }}, {{ overlay_filter }}), {% endif %}url('{{ overlay_img_path }}');{% endif %}"
+	>
+	</div>
+
+</div>

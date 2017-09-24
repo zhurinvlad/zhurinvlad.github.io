@@ -2,6 +2,9 @@
 layout: post
 title:  "Editors Tics&Tricks"
 date:   2017-08-29 14:27:16 +0300
+thumbnail_path: blog/editors/bb_emacs_vim.jpg
+tags:
+- Software
 categories: software
 ---
 

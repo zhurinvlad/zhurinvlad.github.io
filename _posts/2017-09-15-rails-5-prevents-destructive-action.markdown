@@ -2,6 +2,9 @@
 layout: post
 title:  "Rails 5 prevents destructive action on production database"
 date:   2017-09-15 09:27:16 +0300
+thumbnail_path: blog/rails_5_prevents_destructive_action/old_rails.jpg
+tags:
+- Rails
 categories: software
 ---
 
