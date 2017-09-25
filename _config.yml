@@ -64,7 +64,7 @@ sass:
   sass_dir: "/assets/css"
   style: :compressed
 highlighter: rouge
-timezone: 'Russia/Moscow'
+timezone: 'Europe/Moscow'
 repository: zhurinvlad/zhurinvlad.github.io
 
 # Plugins (GitHub Pages only support a few)
