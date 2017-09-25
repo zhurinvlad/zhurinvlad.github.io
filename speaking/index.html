@@ -7,7 +7,7 @@ include_header: speaking_header.html
 nav_item: speaking
 ---
 
-{% for talk in site.data.speaking %}
+<!-- {% for talk in site.data.speaking %}
   <div class="border-bottom border-light-gray mt4 mb4 pb3 circle-line">
     <a href="{{ talk.links | map: 'url' | first }}" target="_blank" name="{{ talk.name | downcase | replace:' ','-' | remove:',' }}">
       <h2>{{ talk.name }}</h2>
@@ -27,4 +27,4 @@ nav_item: speaking
       <time class="inline" datetime="{{ talk.date | date:"%Y-%m-%d" }}">{{ talk.date | date_to_string }}</time>
     </p>    
   </div>
-{% endfor %}
+{% endfor %} -->
