@@ -1,12 +1,12 @@
 - name: "."
-  date: ""
+  date: "1"
   description: |
     .
-  embed_url: ""
+  embed_url: "1"
   links:
     - label: "one"
-      url: ""
+      url: "1"
     - label: "two"
-      url: ""
+      url: "1"
     - label: "three"
-      url: ""
+      url: "1"
