@@ -11,18 +11,16 @@ categories: software
 
 Ошибка MySQL Server Has Gone Away (error 2006) может возникнуть в двух случаях.
 
-{% include media-image.html url="mysql-gone-away.jpg" caption="Схема работы" link="https://ruhighload.com/post/%D0%9A%D0%B0%D0%BA+%D0%B8%D1%81%D0%BF%D1%80%D0%B0%D0%B2%D0%B8%D1%82%D1%8C+Mysql+Server+Has+Gone+Away" width="500" %}
+{% include media-image.html url="page.thumbnail_path" caption="Схема работы" link="https://ruhighload.com/post/%D0%9A%D0%B0%D0%BA+%D0%B8%D1%81%D0%BF%D1%80%D0%B0%D0%B2%D0%B8%D1%82%D1%8C+Mysql+Server+Has+Gone+Away" width="500" %}
 
 ## Таймаут соединения
 
 Наиболее распространенная проблема: таймаут соединения, в результате чего сервер его закрывает. Решение весьма тривиальное — увеличение лимита времени `wait_timeout` в файле конфигурации [`my.cnf`](https://ruhighload.com/post/my.cnf). Для этого в Debian нужно выполнить:
-<figure>
-    <figcaption># Открытие файла настроек MySQL</figcaption>
-    {% highlight powershell %}
-    sudo nano 
-    /etc/mysql/my.cnf
-    {% endhighlight %}
-</figure>
+{% highlight powershell %}
+sudo nano 
+/etc/mysql/my.cnf
+{% endhighlight %}
+<figure><figcaption># Открытие файла настроек MySQL</figcaption></figure>
 
 Затем установить тайм-аут ожидания:
 

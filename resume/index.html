@@ -1,0 +1,30 @@
+---
+layout: default
+title: "Vladislav Zhurin: Resume"
+header_title: Resume
+include_header: resume_header.html
+nav_item: works
+---
+
+<h2 class="mb2">Компании</h2>
+{% for work in site.data.works %}
+  {% include work-outline.html work=work %}
+{% endfor %}
+
+<h2 class="mb2">Образование</h2>
+
+<h2 class="mb2">Конференции, поездки, статьи</h2>
+
+<h2 class="mb2">Языки, технологии, фреймворки</h2>
+Был опыт разработки на С/С++/С#/Java.
+В качестве стэка frontend на данный момент использую html, css, js. Изучаю React.
+<h2 class="mb2">Инструменты</h2>
+Elasticsearch
+<br>
+Redis
+<br>
+RabbitMQ
+<br>
+Jenkins
+<br>
+Ansible

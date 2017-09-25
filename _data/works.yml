@@ -1,0 +1,32 @@
+- name: "Payler"
+  url: "http://payler.com/"
+  date_from: "Январь 2017"
+  date_to: "по настоящее время"
+  working: ""
+  location: "Брянск"
+  description: |
+    Дочерняя компания PoloniumArts, занимающаяся интернет-эквайрингом.
+    Интерграция с онлайн-кассами. Настройка Jenkins, Ansible для Continuous Delivery.
+    Работа с шифрование. 
+  image: "payler.png"
+
+- name: "PoloniumArts"
+  url: "http://poloniumarts.com/"
+  date_from: "Ноябрь 2015"
+  date_to: "январь 2017"
+  working: "1 год 3 месяца"
+  location: "Брянск"
+  description: |
+    Поддержка и доработка существующих приложений, первый опыт на Ruby, Go.
+  image: "poloniumarts.png"
+
+- name: "R-style Softlab"
+  url: "https://www.softlab.ru/"
+  date_from: "Февраль 2015"
+  date_to: "ноябрь 2015"
+  working: "10 месяцев"
+  location: "Брянск"
+  tools: "с++, Oracle"
+  description: |
+    Исправление ошибок. Разработка модулей согласно ТЗ.
+  image: "r-style.png"
