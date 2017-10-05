@@ -6,19 +6,21 @@ include_header: resume_header.html
 nav_item: works
 ---
 
-<h2 class="mb2">Компании</h2>
-{% for work in site.data.works %}
-  {% include work-outline.html work=work %}
-{% endfor %}
+Основной стэк - <b>Ruby on Rails</b> / <b>Go</b> / <b>React</b> / <b>React Native</b>.
+Однако, если другая технология для решения поставленной задачи действительно лучше - используем ее!
 
-<h2 class="mb2">Образование</h2>
+<h3 class="mb2">Языки, технологии, фреймворки</h3>
+Присутствует опыт разработки:
+<br>
+* С/С++/С#/Java/Python
+<br>
+* Angular1/Angular2/Ember
 
-<h2 class="mb2">Конференции, поездки, статьи</h2>
-* <a href="https://www.youtube.com/playlist?list=PLiWUIs1hSNeOXZhotgDX7Y7qBsr24cu7o">RailCLub-2016</a>
-<h2 class="mb2">Языки, технологии, фреймворки</h2>
-Был опыт разработки на С/С++/С#/Java.
-В качестве стэка frontend на данный момент использую html, css, js. Изучаю React.
-<h2 class="mb2">Инструменты</h2>
+<h3 class="mb2">Инструменты</h3>
+PostgreSQL
+<br>
+MySql
+<br>
 Elasticsearch
 <br>
 Redis
@@ -28,3 +30,22 @@ RabbitMQ
 Jenkins
 <br>
 Ansible
+<br>
+AWS
+<br>
+Docker
+<br>
+D3
+
+<h3 class="mb2">Образование, конференции, статьи</h3>
+* Бакалавр по специальности "Математик-программист"
+<br>
+* Магистр по специальности "Информатика и вычислительная техника. Анализ и обрабока данных" (обучаюсь)
+<br>
+* <a href="https://www.youtube.com/playlist?list=PLiWUIs1hSNeOXZhotgDX7Y7qBsr24cu7o">RailCLub-2016</a>
+
+
+<h3 class="mb2">Компании</h3>
+{% for work in site.data.works %}
+  {% include work-outline.html work=work %}
+{% endfor %}

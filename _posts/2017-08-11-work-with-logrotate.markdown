@@ -13,7 +13,7 @@ categories: software
 
 {% highlight powershell %}
 $ ls -lh log/production.log
-  	-rw-rw-r-- 1 www-data www-data 193,2M feb 20 17:49 production.log
+  -rw-rw-r-- 1 www-data www-data 193,2M feb 20 17:49 production.log
 {% endhighlight %}
 Найти что-либо в 200-мегабайтном файле не очень просто ;)
 
@@ -23,8 +23,7 @@ $ ls -lh log/production.log
 sudo apt-get install logrotate
 {% endhighlight %}
 
-В планировщике задач (cron) ежедневно выполняется запуск `logrotate 
-/usr/sbin/logrotate /etc/logrotate.conf` с указанием файла конфига 
+В планировщике задач (cron) ежедневно выполняется запуск `logrotate /usr/sbin/logrotate /etc/logrotate.conf` с указанием файла конфига. 
 В конфиге настраиваются глобальные параметры, которые будут применяться по умолчанию, и как правило подключается директория
 `include /etc/logrotate.d` откуда будут подружатся файлы с описанием правил (секции) для конкретных лог файлов. Пример глобального конфига:
 {% highlight powershell %}
@@ -37,7 +36,7 @@ include /etc/logrotate.d
 
 ### Параметры настройки ### 
 Вот список всех параметров на текущий момент:
-<table class= "table-content">
+<table class="separate-bottom">
    <thead>
       <tr>
          <th>Параметр </th>
@@ -196,7 +195,7 @@ include /etc/logrotate.d
 {% endhighlight %}
 ## Запуск ##
 #### Параметры запуска ####
-<table>
+<table class="separate-bottom">
   <thead>
     <tr>
       <th>Параметр </th>

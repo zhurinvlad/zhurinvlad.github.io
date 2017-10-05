@@ -1,0 +1,17 @@
+table.separate-bottom {
+
+  border: 2px double #ddd;
+
+  th, td {
+    border-bottom: 1px solid #ddd;
+  }
+
+  tr:nth-child(even) {
+    background-color: #f2f2f2
+  }
+
+  th {
+    background-color: #bfc7d9;
+  }
+
+}

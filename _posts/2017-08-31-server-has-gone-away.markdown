@@ -10,57 +10,32 @@ categories: software
 ---
 
 Ошибка MySQL Server Has Gone Away (error 2006) может возникнуть в двух случаях.
+{% include figure.html path="blog/mysql_server_has_gone_away/scheme_has_gone_away.jpg" caption="Схема работы" url="https://ruhighload.com/post/%D0%9A%D0%B0%D0%BA+%D0%B8%D1%81%D0%BF%D1%80%D0%B0%D0%B2%D0%B8%D1%82%D1%8C+Mysql+Server+Has+Gone+Away"%}
 
-{% include media-image.html url="page.thumbnail_path" caption="Схема работы" link="https://ruhighload.com/post/%D0%9A%D0%B0%D0%BA+%D0%B8%D1%81%D0%BF%D1%80%D0%B0%D0%B2%D0%B8%D1%82%D1%8C+Mysql+Server+Has+Gone+Away" width="500" %}
+## Причины возникновения ошибки
+#### 1. Таймаут соединения
 
-## Таймаут соединения
-
-Наиболее распространенная проблема: таймаут соединения, в результате чего сервер его закрывает. Решение весьма тривиальное — увеличение лимита времени `wait_timeout` в файле конфигурации [`my.cnf`](https://ruhighload.com/post/my.cnf). Для этого в Debian нужно выполнить:
+Наиболее распространенная проблема: таймаут соединения, в результате чего сервер его закрывает. Решение весьма тривиальное — увеличение лимита времени `wait_timeout` в файле конфигурации [`my.cnf`](https://ruhighload.com/post/my.cnf). Для этого нужно выполнить следующие команды:
 {% highlight powershell %}
-sudo nano 
-/etc/mysql/my.cnf
+# Открытие файла настроек MySQL
+sudo nano /etc/mysql/my.cnf
+# Установить тайм-аут ожидания в секундах, можно установить вплоть до 28800 с (8 часов)
+wait_timeout = 600
+# Необходима перезагрузка базы данных MySQL
+sudo /etc/init.d/mysql restart 
 {% endhighlight %}
-<figure><figcaption># Открытие файла настроек MySQL</figcaption></figure>
-
-Затем установить тайм-аут ожидания:
-
-<figure>
-    <figcaption># Время ожидания в секундах, можно установить вплоть до 28800 с (8 часов)</figcaption>
-    {% highlight powershell %}
-    wait_timeout = 600
-   {% endhighlight %}
-</figure>
-
-Не забудьте перезагрузить базу:
-
-<figure>
-    <figcaption># Перезагрузка базы данных MySQL</figcaption>
-    {% highlight powershell %}
-    sudo /etc/init.d/mysql restart 
-   {% endhighlight %}
-</figure>
+<figure><figcaption># Настройка timeout в MySQL</figcaption></figure>
 
 Иногда, при выполнении длительных запланированных задач, также может появиться ошибка MySQL Server Has Gone Away все из-за того же таймаута соединения. При этом лимит времени не получится существенно увеличить (максимум до нескольких часов), так как это может привести к заполнению буфера ожидающими соединениями. Поэтому лучше проверить соединение и, при необходимости, переподключиться.
 
-## Большой или некорректный пакет
+#### 2. Большой или некорректный пакет
 
-Вторая распространенная проблема: сервер получает большой или некорректный пакет и отклоняет его. В этом случае сервер считает, что проблема на стороне клиента и закрывает соединение. Так что для решения нужно увеличить лимит на максимальный размер пакета все в том же файле конфигурации:
-<figure>
-    <figcaption># Увеличение лимита размера входящего пакета, в МБ</figcaption>
-    {% highlight powershell %}
-    [mysqld]
-    ...
-    max_allowed_packet = 64M
-    …
-   {% endhighlight %}
-</figure>
-Также не забудьте перезагрузить базу данных.
+Вторая распространенная проблема: сервер получает большой или некорректный пакет и отклоняет его. В этом случае сервер считает, что проблема на стороне клиента и закрывает соединение. Так что для решения нужно увеличить лимит на максимальный размер пакета(в МБ) ```max_allowed_packet = 64M``` все в том же файле конфигурации. Также не забудьте перезагрузить базу данных.
 
-##### Самое главное
+### Оптимальные настройки
+После того, как ошибка MySQL Server Has Gone Away устранена, поиграйтесь с параметрами `wait_timeout` и `max_allowed_packet` для получения оптимальных лимитов. Стандартные конфигурации MySQL под различные размеры оперативной памяти можно посмотреть на сайте [ruhighload](https://ruhighload.com/post/my.cnf). 
 
-После того, как устраните ошибку MySQL Server Has Gone Away, поиграйтесь с параметрами `wait_timeout` и `max_allowed_packet` для получения оптимальных лимитов. Стандартные конфигурации MySQL под различные размеры оперативной памяти можно посмотреть на сайте [ruhighload](https://ruhighload.com/post/my.cnf). 
-
-Подробнее об ошибке можно почитать в документации на [русском](http://www.mysql.ru/docs/man/Gone_away.html) и [английском](https://dev.mysql.com/doc/refman/5.7/en/gone-away.html)
+Подробнее об этой ошибке советую почитать в документации на [русском](http://www.mysql.ru/docs/man/Gone_away.html) и [английском](https://dev.mysql.com/doc/refman/5.7/en/gone-away.html)
 
 
 ## Reconnect в Rails, каков он?
@@ -69,16 +44,16 @@ sudo nano
  
  Как бы странно это не было, но раньше возможности автоматического переподключения не было... Пакеты просто бились об закрытое соединения, заполняя логи и бесконечно уведомляя разработчиков. Приходилось либо в ручную делать MonkeyPatch, либо каждый раз, при возникновении ошибки, перезапускать приложение(особо хардкорный путь).
 
-MySQL поддерживает флаг повторного подключения в своих соединения. И в случае, если установлено значение true, клиент будет пытаться повторно подключиться к серверу, прежде чем отказаться выкинуть ошибку в случаее потерянного соединения. 
+MySQL поддерживает флаг повторного подключения в своих соединения. И в случае, если установлено значение true, клиент будет пытаться повторно подключиться к серверу, прежде чем выкинуть ошибку в случаее потерянного соединения. 
 
 И вот, начиная с версии Rails 2.3, у нас появился параметр `reconnect`. Теперь, чтобы получуть такое поведение из приложений Rails, достаточно установить флаг `reconnect: true` для подключений mysql в файле **database.yml**.
 
-Однако по умалчанию этот флаг равен `false`. Команда Rails cделала это затем, чтобы
-не нарушать работу текущих приложений, т.к. у данной опции есть существенный минус - **ЭТО НЕ БЕЗОПАСНО ДЛЯ ВЫПОЛНЕНИЯ ТРАНЗАКЦИЙ** . И в документации mysql об этом явно сказано,
+По умалчанию этот флаг равен `false`. Команда Rails cделала это затем, чтобы
+не нарушать работу текущих приложений, т.к. у данной опции есть существенный минус - **ЭТО НЕ БЕЗОПАСНО ДЛЯ ВЫПОЛНЕНИЯ ТРАНЗАКЦИЙ** . И в документации mysql об этом явно сказано:
 
 ``` Any active transactions are rolled back and autocommit mode is reset ```
  
- а также указаны другие [минусы](https://dev.mysql.com/doc/refman/5.7/en/c-api-auto-reconnect.html). Опираясь на это руководство *ActiveRecord* с установленным флагом попытается подключиться всего  ***один раз***!
+ А также указаны другие [минусы](https://dev.mysql.com/doc/refman/5.7/en/c-api-auto-reconnect.html). Опираясь на это руководство *ActiveRecord* с установленным флагом попытается подключиться всего  ***один раз***!
  
 ```
 The MySQL client library can perform an automatic reconnection to the server if
@@ -86,25 +61,25 @@ it finds that the connection is down when you attempt to send a statement to the
 If auto-reconnect is enabled, the library tries once to reconnect to the server and send the statement again.
 ```
 
-Такое поведение далеко не самое лучшее, ведь возможны случаи, когда нам потребуется больше одной попытки подключения. Например неставить работа сервера при репликации master-slave. И на некоторое время мы должны не потерять соедениение, чтобы обеспечить надежность сервиса и не потерять запрос.
+Такое поведение далеко не самое лучшее, ведь возможны случаи, когда нам потребуется больше одной попытки подключения. Например, при репликации master-slave, где на некоторое время мы должны не потерять соедениение, чтобы обеспечить надежность сервиса и не потерять запрос.
 
 Один из способов сделать это - добавить патч к *AR*, который будет выполнять автоматический reconnect нужно количество раз через нужные нам интервалы.
 
-{% highlight ruby linenos %}
+{% highlight ruby %}
 module Mysql2AdapterPatch
   def execute(*args)
-    # During `reconnect!`, `Mysql2Adapter` first disconnect and set the
-    # @connection to nil, and then tries to connect. When connect fails,
-    # @connection will be left as nil value which will cause issues later.
+    # During `reconnect!`, `Mysql2Adapter` first disconnect 
+    # and set the @connection to nil, and then tries to connect. 
+    # When connect fails, @connection will be left as nil 
+    # value which will cause issues later.
     connect if @connection.nil?
 
     begin
       super(*args)
     rescue ActiveRecord::StatementInvalid => e
       if e.message =~ /server has gone away/i
-        in_transaction = transaction_manager.current_transaction.open?
         try_reconnect
-        in_transaction ? raise : retry
+        transaction_open? ? raise : retry
       else
         raise
       end
@@ -127,6 +102,10 @@ module Mysql2AdapterPatch
         raise
       end
     end
+  end
+  
+  def transaction_open?
+    transaction_manager.current_transaction.open?
   end
 end
 
@@ -162,13 +141,15 @@ end
 В данном случае, если при `sleep 5` произошло успешное переподключение, то все равно будет вызвана ошибка подключения, т.к. в соответствии с документацией MySQL, описанной выше, Post.create выполнено не будет.
 
 {% highlight powershell %}
-   (0.3ms)  BEGIN
-  SQL (0.2ms)  INSERT INTO `posts` (`created_at`, `updated_at`) VALUES ('2017-01-18 20:18:14', '2017-01-18 20:18:14')
-   (0.2ms)  SELECT COUNT(*) FROM `posts`
-Server timed out, retrying in 0.1 sec.
-Server timed out, retrying in 0.5 sec.
-Server timed out, retrying in 1 sec.
-Server timed out, retrying in 2 sec.
-   (0.1ms)  ROLLBACK
-ActiveRecord::StatementInvalid: Mysql2::Error: MySQL server has gone away: SELECT COUNT(*) FROM `posts`
+(0.3ms)  BEGIN
+    SQL (0.2ms) INSERT INTO `posts` (`created_at`, `updated_at`) 
+                VALUES ('2017-01-18 20:18:14', '2017-01-18 20:18:14')
+    (0.2ms)  SELECT COUNT(*) FROM `posts`
+    Server timed out, retrying in 0.1 sec.
+    Server timed out, retrying in 0.5 sec.
+    Server timed out, retrying in 1 sec.
+    Server timed out, retrying in 2 sec.
+(0.1ms)  ROLLBACK
+ActiveRecord::StatementInvalid: 
+    Mysql2::Error: MySQL server has gone away: SELECT COUNT(*) FROM `posts`
 {% endhighlight %}
