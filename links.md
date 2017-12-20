@@ -53,6 +53,7 @@ https://learn.javascript.ru/es-modern-usage
 - https://metanit.com/web/html5/5.2.php
 
 ### BEST
+- [https://davidwalsh.name/](https://davidwalsh.name/)
 - [https://react.rocks/tag/SVG?show=60](https://react.rocks/tag/SVG?show=60)
 - [https://github.com/clauderic/react-sortable-hoc](https://github.com/clauderic/react-sortable-hoc)
 - [https://react.rocks/tag/List](https://react.rocks/tag/List)
@@ -70,6 +71,7 @@ https://learn.javascript.ru/es-modern-usage
 ### JS
 - [SVG](http://svgjs.com/)
 - [https://proglib.io/p/learning-modern-javascript/](https://proglib.io/p/learning-modern-javascript/)
+- Куча классных библиотек на [js](https://proglib.io/p/webdev-tools/)
 
 ### React
 ##### TODO
