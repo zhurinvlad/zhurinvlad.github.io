@@ -37,7 +37,7 @@ categories: software
 Очень мощный инструмент c множеством плагинов. Вот одна из подборок действительно хороших [плагинов](https://habrahabr.ru/post/235901/). И подборка [горячих](http://www.hongkiat.com/blog/sublime-text-tips/) клавиш. А [тут](http://olivierlacan.com/posts/launch-sublime-text-3-from-the-command-line/) настройка как запускать из консоли.
 
 #### RubyMine ####
-Если мне что-то нужно по RubyMine я захожу сюда - [RubyMineTips](https://github.com/amckinnell/RubyMineTips/wiki), а [здесь](http://devcolibri.com/2151) смотрю список горячих клавиш на русском.
+Если мне что-то нужно по RubyMine я захожу сюда - [RubyMineTips](https://github.com/amckinnell/RubyMineTips/wiki), а [здесь](https://shortcutworld.com/RubyMine/mac/JetBrains-RubyMine_Shortcuts) и [здесь](https://www.shortcutfoo.com/app/dojos/rubymine-mac/cheatsheet) смотрю список горячих клавиш на русском.
 
 
 ## Midnight Commander ##
